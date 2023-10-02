@@ -12,6 +12,14 @@ public class PlayerMove : MonoBehaviour
 
     public LineRenderer launchRenderer; // a line showing the direction the player will be launched in
 
+    public static Vector3 activePlayerPos; // the position of the active player, stored by the class as a whole. As long as there isn't more than
+                                           // one player in the scene at a time, this shouldn't cause any problems
+
+    private void Awake()
+    {
+        activePlayerPos = transform.position; // sets the active player position to this object's position
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,15 +31,20 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0)) // Checks if left mouse button is held down
+        activePlayerPos = transform.position; // sets the active player position to this object's position
+
+        if (rb2d.velocity == Vector2.zero)
         {
-            CalculateLaunchLine(GetMouseWorldPosition()); // Sets the attached line renderer to draw a line showing the current launch direction
-            launchRenderer.enabled = true;
-        }
-        if (Input.GetMouseButtonUp(0)) // Checks if left mouse button is released
-        {
-            Launch(GetMouseWorldPosition()); // call Launch to launch the player towards the mouse position
-            launchRenderer.enabled = false;
+            if (Input.GetMouseButton(0)) // Checks if left mouse button is held down
+            {
+                CalculateLaunchLine(GetMouseWorldPosition()); // Sets the attached line renderer to draw a line showing the current launch direction
+                launchRenderer.enabled = true;
+            }
+            if (Input.GetMouseButtonUp(0)) // Checks if left mouse button is released
+            {
+                Launch(GetMouseWorldPosition()); // call Launch to launch the player towards the mouse position
+                launchRenderer.enabled = false;
+            }
         }
     }
 

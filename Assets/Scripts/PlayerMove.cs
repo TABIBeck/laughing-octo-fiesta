@@ -33,17 +33,24 @@ public class PlayerMove : MonoBehaviour
     {
         activePlayerPos = transform.position; // sets the active player position to this object's position
 
-        if (rb2d.velocity == Vector2.zero)
+        if (Input.GetMouseButton(0)) // Checks if left mouse button is held down
         {
-            if (Input.GetMouseButton(0)) // Checks if left mouse button is held down
+            CalculateLaunchLine(GetMouseWorldPosition()); // Sets the attached line renderer to draw a line showing the current launch direction
+            launchRenderer.enabled = true;
+            if (rb2d.velocity == Vector2.zero) // the line is transparent if it is not valid for launch, and solid if it is
             {
-                CalculateLaunchLine(GetMouseWorldPosition()); // Sets the attached line renderer to draw a line showing the current launch direction
-                launchRenderer.enabled = true;
+                launchRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 1f));
+            } else
+            {
+                launchRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.3f));
             }
-            if (Input.GetMouseButtonUp(0)) // Checks if left mouse button is released
+        }
+        if (Input.GetMouseButtonUp(0)) // Checks if left mouse button is released
+        {
+            launchRenderer.enabled = false;
+            if (rb2d.velocity == Vector2.zero) // only launches if the player is not moving (which only happens when the player is on the ground)
             {
                 Launch(GetMouseWorldPosition()); // call Launch to launch the player towards the mouse position
-                launchRenderer.enabled = false;
             }
         }
     }

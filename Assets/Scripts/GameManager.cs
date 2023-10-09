@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameState state = GameState.Playing;
 
+    private void Start()
+    {
+        Time.timeScale = 3.0f;
+    }
+
     public static void PauseSlime() // pauses the game, called by pressing the in game pause button
     {
         switch (state)
@@ -26,7 +31,7 @@ public class GameManager : MonoBehaviour
             case GameState.Paused:
                 UIManager.HidePauseText();
                 state = GameState.Playing;
-                Time.timeScale = 1f;
+                Time.timeScale = 3f;
                 break;
             case GameState.Dead: // you can't pause or unpause while dead, but this button should be disabled in such a scenario anyway
                 break;
@@ -49,7 +54,7 @@ public class GameManager : MonoBehaviour
                 {
                     UIManager.HideStageText();
                     state = GameState.Playing;
-                    Time.timeScale = 1f;
+                    Time.timeScale = 3f;
                 } else // if this screen isn't up, it must be one of the others. Hide all other screens and pull up this one
                 {
                     UIManager.HidePauseText();
@@ -80,7 +85,7 @@ public class GameManager : MonoBehaviour
                 {
                     UIManager.HideQuitText();
                     state = GameState.Playing;
-                    Time.timeScale = 1f;
+                    Time.timeScale = 3f;
                 }
                 else // if this screen isn't up, it must be one of the others. Hide all other screens and pull up this one
                 {
@@ -106,7 +111,7 @@ public class GameManager : MonoBehaviour
     public static void LoadLevel(string sceneName)
     {
         state = GameState.Playing; // this can be called from pause menus, so important to unpause the game if doing so
-        Time.timeScale = 1f;
+        Time.timeScale = 3f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 

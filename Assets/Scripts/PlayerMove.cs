@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         activePlayerPos = transform.position; // sets the active player position to this object's position
+        Time.timeScale = 3.0f; // because of the quick patch speed thing
     }
 
     // Start is called before the first frame update

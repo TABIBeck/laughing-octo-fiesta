@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -4746355508614184816}
   - component: {fileID: -4262741862458078678}
   - component: {fileID: 6790143948076541209}
+  - component: {fileID: 8454685623277189941}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcbe6cdda80d1e46bd245f400dd8734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curse: 40
+  curse: 15
   dragLimit: 10
   launchRenderer: {fileID: 2106647454643402891, guid: 357bec92e6d9cd440a877558e592576b, type: 3}
   anim: {fileID: 6790143948076541209}
@@ -211,3 +212,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8454685623277189941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2638259931536603011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07d721394dd94656a1f5024e47038d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfCoins: 0

@@ -107,5 +107,55 @@ public class PlayerMove : MonoBehaviour
         launchVector = launchVector.normalized * curse * (launchVector.magnitude / dragLimit); // sets its magnitude to the speed multiplied by the distance the mouse
             // was dragged divided by the dragLimit. So if it's dragged all the way to the limit, the magnitude of the resulting vector equals launchForce
         rb2d.velocity = launchVector; // set the rigidbody velocity equal to the calculated vector
+        StartCoroutine(Wiggle());
     }
+
+    IEnumerator Wiggle() // sin function to change the scale of the player when it launches as the force ripples through it
+    {
+        float wiggleLength = 0.5f; // the number of seconds that it wiggles for
+        float timer = 0f;
+        float size; // target scale for this frame
+        while (timer <= wiggleLength)
+        {
+            size = Mathf.Sin(timer * (24 * wiggleLength)) / 4;
+            transform.localScale = new Vector3(1 + size, 1 + size, 1);
+            timer += Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime); // runs again next frame
+        }
+    }
+
+
+
+    /* //Horrible easing failure that lets you clip through the stage
+    private float InElastic(float t) => 1 - OutElastic(1 - t);
+    private float OutElastic(float t)
+    {
+        float p = 0.3f;
+        return (float)Mathf.Pow(2, -10 * t) * (float)Mathf.Sin((t - p / 4) * (2 * Mathf.PI) / p) + 1;
+    }
+    private float InOutElastic(float t)
+    {
+        if (t < 0.5) return InElastic(t * 2) / 2;
+        return 1 - InElastic((1 - t) * 2) / 2;
+    }
+
+    IEnumerator Wiggle() // easing function to change the scale of the player when it launches as the force ripples through it
+    {
+        float wiggleLength = 1; // the number of seconds that it wiggles for
+        float size; // target scale for this frame
+        while (wiggleLength > 0f)
+        {
+            size = InOutElastic(wiggleLength);
+            transform.localScale = new Vector3(size, size, 1);
+            wiggleLength -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime); // runs again next frame
+        }
+        while (wiggleLength < 1f)
+        {
+            size = InOutElastic(wiggleLength);
+            transform.localScale = new Vector3(size, size, 1);
+            wiggleLength += Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime); // runs again next frame
+        }
+    } */
 }

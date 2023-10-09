@@ -96,11 +96,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8398833805327918006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77e57fae69159754faa0c286e8b3751e, type: 3}
+  m_Script: {fileID: 11500000, guid: bae354c57b6284800907ceb9e64a1065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
-  speed: 3
+  speed: 4
 --- !u!70 &5166776999376474727
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

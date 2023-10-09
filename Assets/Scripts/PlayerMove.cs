@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float curse; // Initial speed of the player in units per second after a max distance launch
+    [SerializeField] private float curse; // Initial speed of the player in units per second after a max distance launch
     // in regards to the variable name of the above, I'm sorry Benno but it just wasn't working until I changed
     // the name to this. That's the only thing that changed. Just Visual Studio's rename thing. And then it worked. I can't argue with that
-    public float dragLimit; // The furthest out you can drag the mouse to increase the slime's launch power
+    [SerializeField] private float dragLimit; // The furthest out you can drag the mouse to increase the slime's launch power
     //The force that the player is launched at is launchForce * the percentage of this distance that the mouse is dragged away from the player
 
     private Rigidbody2D rb2d; // the object's rigidbody component
 
-    public LineRenderer launchRenderer; // a line showing the direction the player will be launched in
+    [SerializeField] private LineRenderer launchRenderer; // a line showing the direction the player will be launched in
 
     public static Vector3 activePlayerPos; // the position of the active player, stored by the class as a whole. As long as there isn't more than
                                            // one player in the scene at a time, this shouldn't cause any problems
@@ -35,24 +35,28 @@ public class PlayerMove : MonoBehaviour
     {
         activePlayerPos = transform.position; // sets the active player position to this object's position
 
-        if (Input.GetMouseButton(0)) // Checks if left mouse button is held down
+        if (GameManager.state == GameState.Playing) // only allows for aiming and launching player if game is not paused or dead
         {
-            CalculateLaunchLine(GetMouseWorldPosition()); // Sets the attached line renderer to draw a line showing the current launch direction
-            launchRenderer.enabled = true;
-            if (rb2d.velocity == Vector2.zero) // the line is transparent if it is not valid for launch, and solid if it is
+            if (Input.GetMouseButton(0)) // Checks if left mouse button is held down
             {
-                launchRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 1f));
-            } else
-            {
-                launchRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.3f));
+                CalculateLaunchLine(GetMouseWorldPosition()); // Sets the attached line renderer to draw a line showing the current launch direction
+                launchRenderer.enabled = true;
+                if (rb2d.velocity == Vector2.zero) // the line is transparent if it is not valid for launch, and solid if it is
+                {
+                    launchRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 1f));
+                }
+                else
+                {
+                    launchRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.3f));
+                }
             }
-        }
-        if (Input.GetMouseButtonUp(0)) // Checks if left mouse button is released
-        {
-            launchRenderer.enabled = false;
-            if (rb2d.velocity == Vector2.zero) // only launches if the player is not moving (which only happens when the player is on the ground)
+            if (Input.GetMouseButtonUp(0)) // Checks if left mouse button is released
             {
-                Launch(GetMouseWorldPosition()); // call Launch to launch the player towards the mouse position
+                launchRenderer.enabled = false;
+                if (rb2d.velocity == Vector2.zero) // only launches if the player is not moving (which only happens when the player is on the ground)
+                {
+                    Launch(GetMouseWorldPosition()); // call Launch to launch the player towards the mouse position
+                }
             }
         }
     }

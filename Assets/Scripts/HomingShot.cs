@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HomingShot : StraightShot
 {
-    public float rotationPerSecond; // the number of degrees that the missile rotates towards the target direction each second
+    [SerializeField] private float rotationPerSecond; // the number of degrees that the missile rotates towards the target direction each second
 
     // Update is called once per frame
     void Update()

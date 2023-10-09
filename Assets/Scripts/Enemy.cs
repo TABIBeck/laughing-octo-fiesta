@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Vector3 firingPos = Vector3.zero; // the position relative to the center of the enemy that the enemy spawns their bullets at, defaults to 0
-    public float shotDelay; // delay between shots in seconds, will be randomly offset a bit
-    public GameObject[] attackPatterns; // The different attack game objects that the enemy can spawn
+    [SerializeField] protected Vector3 firingPos = Vector3.zero; // the position relative to the center of the enemy that the enemy spawns their bullets at, defaults to 0
+    [SerializeField] protected float shotDelay; // delay between shots in seconds, will be randomly offset a bit
+    [SerializeField] protected GameObject[] attackPatterns; // The different attack game objects that the enemy can spawn
 
     // Start is called before the first frame update
     void Start()

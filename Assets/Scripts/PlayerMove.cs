@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private LineRenderer launchRenderer; // a line showing the direction the player will be launched in
 
+    [SerializeField] private Animator anim; // the animator for the player
+
     public static Vector3 activePlayerPos; // the position of the active player, stored by the class as a whole. As long as there isn't more than
                                            // one player in the scene at a time, this shouldn't cause any problems
 
@@ -35,6 +37,11 @@ public class PlayerMove : MonoBehaviour
     {
         activePlayerPos = transform.position; // sets the active player position to this object's position
 
+        if (rb2d.velocity == Vector2.zero)
+        {
+            anim.SetBool("Airborne", false); // if its stopped it must not be airborne, so we'll tell the animation that
+        }
+
         if (GameManager.state == GameState.Playing) // only allows for aiming and launching player if game is not paused or dead
         {
             if (Input.GetMouseButton(0)) // Checks if left mouse button is held down
@@ -44,6 +51,7 @@ public class PlayerMove : MonoBehaviour
                 if (rb2d.velocity == Vector2.zero) // the line is transparent if it is not valid for launch, and solid if it is
                 {
                     launchRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 1f));
+                    anim.SetBool("Charging", true); // sets the animator to the charging animation
                 }
                 else
                 {
@@ -56,6 +64,8 @@ public class PlayerMove : MonoBehaviour
                 if (rb2d.velocity == Vector2.zero) // only launches if the player is not moving (which only happens when the player is on the ground)
                 {
                     Launch(GetMouseWorldPosition()); // call Launch to launch the player towards the mouse position
+                    anim.SetBool("Airborne", true);
+                    anim.SetBool("Charging", false);
                 }
             }
         }

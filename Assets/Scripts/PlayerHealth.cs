@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
     private static int maxHealth = 3;
     private int currentHealth = maxHealth; // each player starts at full health
 
+    [SerializeField] private Animator anim; // the player's animator
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,14 +30,16 @@ public class PlayerHealth : MonoBehaviour
         }
         if (currentHealth <= 0 ) // if the player's health hits zero, they die
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
-    private void Die() // the player dies
+    private IEnumerator Die() // the player dies
     {
         GameManager.state = GameState.Dead;
         UIManager.ShowRestartText();
+        anim.SetBool("Dead", true);
+        yield return new WaitForSeconds(0.6f);
         Destroy(this.gameObject);
     }
 }

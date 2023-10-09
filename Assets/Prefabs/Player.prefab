@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3309288409210781176}
   - component: {fileID: 1862135420135981146}
   - component: {fileID: 1326793320372231828}
+  - component: {fileID: -7557442105279628404}
   - component: {fileID: -4746355508614184816}
   - component: {fileID: -5632083452525272975}
-  - component: {fileID: 8383274399950399954}
+  - component: {fileID: 534842802705971656}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -100,9 +101,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcbe6cdda80d1e46bd245f400dd8734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 12
-  dragLimit: 4
+  curse: 40
+  dragLimit: 10
   launchRenderer: {fileID: 2106647454643402891, guid: 357bec92e6d9cd440a877558e592576b, type: 3}
+--- !u!114 &-7557442105279628404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2638259931536603011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e030b42d31eabdc45a59bce9fdf1c613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &-4746355508614184816
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -136,54 +149,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!50 &-5632083452525272975
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2638259931536603011}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!114 &8383274399950399954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2638259931536603011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecd142e69c96f442ead236dbfb26529e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Radius: 0.5

@@ -4,17 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
+  - WallLayer
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - wallLayer
+  - Player
   - Water
   - UI
-  - Player
-  - 
-  - 
+  - WallLayer
+  - Decoration
+  - Bounce
   - 
   - 
   - 

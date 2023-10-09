@@ -107,7 +107,7 @@ public class PlayerMove : MonoBehaviour
         launchVector = launchVector.normalized * curse * (launchVector.magnitude / dragLimit); // sets its magnitude to the speed multiplied by the distance the mouse
             // was dragged divided by the dragLimit. So if it's dragged all the way to the limit, the magnitude of the resulting vector equals launchForce
         rb2d.velocity = launchVector; // set the rigidbody velocity equal to the calculated vector
-        StartCoroutine(Wiggle());
+        //StartCoroutine(Wiggle());
     }
 
     IEnumerator Wiggle() // sin function to change the scale of the player when it launches as the force ripples through it

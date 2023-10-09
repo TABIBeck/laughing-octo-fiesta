@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 5
   speed: 4
+  damage: 1
   rotationPerSecond: 30
 --- !u!70 &5872235746125601975
 CapsuleCollider2D:

@@ -6,22 +6,15 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
     Playing,
-    Paused
+    Paused,
+    Dead
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameState state = GameState.Playing;
 
-    private void Start()
-    {
-        /*UIManager.CreateMenu();*/
-    }
-    void Update()
-    {
-    }
-
-    public void PauseSlime() // pauses the game, called by pressing the in game pause button
+    public static void PauseSlime() // pauses the game, called by pressing the in game pause button
     {
         switch (state)
         {
@@ -35,12 +28,14 @@ public class GameManager : MonoBehaviour
                 state = GameState.Playing;
                 Time.timeScale = 1f;
                 break;
+            case GameState.Dead: // you can't pause or unpause while dead, but this button should be disabled in such a scenario anyway
+                break;
             default:
                 break;
         }
     }
 
-    public void StageSlime()
+    public static void StageSlime()
     {
         switch (state)
         {
@@ -50,25 +45,28 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0f;
                 break;
             case GameState.Paused:
-                if ((UIManager.quitText.activeSelf == false) & (UIManager.pauseText.activeSelf == false)) // if neither of hte other screens is up, this one
-                    // must be the one making the game pause, so resume the game
+                if (UIManager.IsStageTextUp()) // if this screen is already up and its button is pressed again, resume the game
                 {
                     UIManager.HideStageText();
                     state = GameState.Playing;
                     Time.timeScale = 1f;
-                } else // if one of the other screens is up, hide all other screens and pull up this one
+                } else // if this screen isn't up, it must be one of the others. Hide all other screens and pull up this one
                 {
                     UIManager.HidePauseText();
                     UIManager.HideQuitText();
                     UIManager.ShowStageText();
                 }
                 break;
+            case GameState.Dead: // if this is called, the player should be on the restart menu, which will close when we leave, and LoadLevel unpauses the game
+                // for us too, so we can just call it and go
+                LoadLevel("StageSelect");
+                break;
             default:
                 break;
         }
     }
 
-    public void QuitSlime()
+    public static void QuitSlime()
     {
         switch (state)
         {
@@ -78,19 +76,22 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0f;
                 break;
             case GameState.Paused:
-                if ((UIManager.stageText.activeSelf == false) & (UIManager.pauseText.activeSelf == false)) // if neither of the other screens is up, this one
-                                                                                                          // must be the one making the game pause, so resume the game
+                if (UIManager.IsQuitTextUp()) // if this screen is already up and its button is pressed again, resume the game
                 {
                     UIManager.HideQuitText();
                     state = GameState.Playing;
                     Time.timeScale = 1f;
                 }
-                else // if one of the other screens is up, hide all other screens and pull up this one
+                else // if this screen isn't up, it must be one of the others. Hide all other screens and pull up this one
                 {
                     UIManager.HidePauseText();
                     UIManager.HideStageText();
                     UIManager.ShowQuitText();
                 }
+                break;
+            case GameState.Dead: // if this is called, the player should be on the restart menu. Quitting from here doesn't really lose anything, and the player might
+                // be rage quitting from here anyway, so best to make this as quick as possible and just quit without asking for secondary confirmation
+                FullQuit();
                 break;
             default:
                 break;
@@ -107,5 +108,10 @@ public class GameManager : MonoBehaviour
         state = GameState.Playing; // this can be called from pause menus, so important to unpause the game if doing so
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
+    public static void ReloadLevel()
+    {
+        LoadLevel(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }

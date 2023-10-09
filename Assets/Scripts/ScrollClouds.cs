@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ScrollClouds : MonoBehaviour
 {
-    public float scrollSpeed = 1f; // the speed at which the clouds scroll
+    [SerializeField] private float scrollSpeed = 1f; // the speed at which the clouds scroll
 
     private RectTransform myRectTransform;
 

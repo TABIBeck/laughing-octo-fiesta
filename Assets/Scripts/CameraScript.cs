@@ -7,22 +7,17 @@ public class CameraScript : MonoBehaviour
     //public float crazy_meter = 1;
     public float offsetY;
 
-    private Transform player;
-
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // locks camera's y
-    void Update()
+    void LateUpdate() // we move the camera on late update so that it always has the up to date version of activePlayerPos
     {
-
-        player = GameObject.Find("Player").transform;
         Vector3 pos = transform.position;
-        pos.y = player.position.y + offsetY;
-        if (player.position.y >= offsetY)
+        pos.y = PlayerMove.activePlayerPos.y + offsetY;
+        if (PlayerMove.activePlayerPos.y >= offsetY)
         {
             transform.position = pos;
         }

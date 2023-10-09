@@ -6,6 +6,7 @@ public class StraightShot : MonoBehaviour
 {
     public float lifetime; // the number of seconds that the shot remains active for before exploding
     public float speed; // the speed of the projectile
+    public int damage = 1; // the amount of damage the projectile deals
 
     protected Vector3 facingDir; // The direction that the shot is facing in and moving towards
     protected Rigidbody2D myRb2D;
@@ -29,11 +30,11 @@ public class StraightShot : MonoBehaviour
 
     protected void OnCollisionEnter2D(Collision2D collision) // LATER change the script it grabs to whatever actually handles health
     {
-        PlayerMove playerMove = collision.gameObject.GetComponent<PlayerMove>(); // grabs a reference to the PlayerMove script of the target it hits, so that it can check
+        PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>(); // grabs a reference to the PlayerHealth script of the target it hits, so that it can check
             // if the target has that script (and thus is a player) and so that it can hurt them
-        if (playerMove != null ) // if it hit the player
+        if (playerHealth != null ) // if it hit the player
         {
-            // LATER when you have a hurt() function call it on the grabbed script here
+            playerHealth.Hurt(damage); // deals its damage to the player
         }
         Explode(); // explodes because it hit something
     }

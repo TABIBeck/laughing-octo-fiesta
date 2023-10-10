@@ -10,6 +10,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float dragLimit; // The furthest out you can drag the mouse to increase the slime's launch power
     //The force that the player is launched at is launchForce * the percentage of this distance that the mouse is dragged away from the player
 
+    private AudioSource myAudioSource;
+
     private Rigidbody2D rb2d; // the object's rigidbody component
 
     [SerializeField] private LineRenderer launchRenderer; // a line showing the direction the player will be launched in
@@ -28,6 +30,13 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        myAudioSource = GetComponent<AudioSource>();
+
+        if (myAudioSource == null)
+        {
+            Debug.LogError("Player Audio source is null");
+        }
+
         launchRenderer = Instantiate(launchRenderer, Vector3.zero, transform.rotation); // Makes its own personal copy of the line renderer and holds onto that
         launchRenderer.enabled = false; // makes sure the line doesn't show up right away
     }
@@ -63,9 +72,11 @@ public class PlayerMove : MonoBehaviour
                 launchRenderer.enabled = false;
                 if (rb2d.velocity == Vector2.zero) // only launches if the player is not moving (which only happens when the player is on the ground)
                 {
+
                     Launch(GetMouseWorldPosition()); // call Launch to launch the player towards the mouse position
                     anim.SetBool("Airborne", true);
                     anim.SetBool("Charging", false);
+                    myAudioSource.Play(); // sound effect
                 }
             }
         }

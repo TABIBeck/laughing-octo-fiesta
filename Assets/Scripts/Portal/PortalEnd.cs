@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 public class PortalEnd : MonoBehaviour
 {
     public int level = 0;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim.SetBool("levelDone", false);
     }
 
     // Update is called once per frame
@@ -23,8 +24,8 @@ public class PortalEnd : MonoBehaviour
     {
         if (collision.GetComponent<PlayerMove>())
         {
-            
-            Invoke("ChangeScene", 0.5f);
+            anim.SetBool("levelDone", true);
+            Invoke("ChangeScene", 0.1f);
         }
     }
     void ChangeScene()

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5883672447142144120}
   - component: {fileID: 4322434895323188105}
-  - component: {fileID: 4410187029099127946}
   - component: {fileID: 5162666312421266262}
+  - component: {fileID: -7795010092967783417}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4410187029099127946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7978098573269251497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eed133af0bc140a98174a0d4a461e64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
 --- !u!70 &5162666312421266262
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -134,3 +121,15 @@ CapsuleCollider2D:
   m_Offset: {x: -0.00000011920926, y: -0.23141511}
   m_Size: {x: 0.94974613, y: 2.8781886}
   m_Direction: 0
+--- !u!114 &-7795010092967783417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7978098573269251497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eed133af0bc140a98174a0d4a461e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
